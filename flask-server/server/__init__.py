@@ -21,7 +21,7 @@ app.config['JWT_TOKEN_LOCATION'] = ['cookies']
 app.config['JWT_COOKIE_SECURE'] = True
 app.config['JWT_COOKIE_CSRF_PROTECT'] = True
 
-CORS(app, supports_credentials=True, origins=['http://localhost:5173', 'http://localhost:5173/schedule'])
+CORS(app, supports_credentials=True, origins=['https://bad-weather-notifier.onrender.com', 'https://bad-weather-notifier.onrender.com/schedule'])
 oauth = OAuth(app)
 db = SQLAlchemy(app)
 

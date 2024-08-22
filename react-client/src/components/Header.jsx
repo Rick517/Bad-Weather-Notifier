@@ -34,11 +34,11 @@ const Header = ({ authorized, logout }) => {
             <p className='mt-2 text-lg font-montserrat text-gray-600'>Login & Registration</p>
             <p className="text-md font-openSans text-gray-500 mb-5">Please select an option to sign in</p>
             <div>
-                <Link to="http://localhost:5000/login/google" className='authorization-link'>
+                <Link to="https://bad-weather-notifier.onrender.com/login/google" className='authorization-link'>
                     <img src={googleIcon} alt="Google" className='w-5 h-5' />
                     <span>Google</span>
                 </Link>
-                <Link to="http://localhost:5000/login/facebook" className='authorization-link'>
+                <Link to="https://bad-weather-notifier.onrender.com/login/facebook" className='authorization-link'>
                     <img src={facebookIcon} alt="Google" className='w-5 h-5' />
                     <span>Facebook</span>
                 </Link>

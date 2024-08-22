@@ -6,7 +6,7 @@ import Header from './components/Header.jsx'
 import Hero from './components/Hero.jsx'
 
 
-const BASE_URL = 'http://localhost:5000'
+const BASE_URL = 'https://bad-weather-notifier.onrender.com'
 export const serverAxios = axios.create({
   withCredentials: true,
   baseURL: BASE_URL
