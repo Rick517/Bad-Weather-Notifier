@@ -1,0 +1,10 @@
+Flask==2.3.3
+Flask-Cors==3.1.0
+Flask-JWT-Extended==4.5.2
+Flask-SQLAlchemy==3.0.5
+Authlib==1.2.0
+Flask-Mailman==0.2.4
+APScheduler==3.10.1
+pytz==2023.3
+requests==2.31.0
+timezonefinder==6.2.0
