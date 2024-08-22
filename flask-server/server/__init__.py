@@ -18,7 +18,7 @@ app.config['JWT_SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['JWT_TOKEN_LOCATION'] = ['cookies']
 # Only allow JWT cookies to be sent over https. In production, this
 # should likely be True
-app.config['JWT_COOKIE_SECURE'] = False
+app.config['JWT_COOKIE_SECURE'] = True
 app.config['JWT_COOKIE_CSRF_PROTECT'] = True
 
 CORS(app, supports_credentials=True, origins=['http://localhost:5173', 'http://localhost:5173/schedule'])
