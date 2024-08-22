@@ -7,7 +7,7 @@ with app.app_context():
         google_keys['name'],
         client_id=google_keys['client_id'],
         client_secret=google_keys['client_secret'],
-        redirect_uri='https://bad-weather-notifier.onrender.com/oauth/google',
+        redirect_uri='https://bad-weather-notifier-server.onrender.com/oauth/google',
         client_kwargs={'scope': 'openid email'},
         server_metadata_url='https://accounts.google.com/.well-known/openid-configuration'
     )
@@ -18,6 +18,6 @@ with app.app_context():
         client_secret=facebook_keys['client_secret'],
         authorize_url=facebook_keys['authorize_url'],
         access_token_url=facebook_keys['access_token_url'],
-        redirect_uri='https://bad-weather-notifier.onrender.com/oauth/google',
+        redirect_uri='https://bad-weather-notifier-server.onrender.com/oauth/google',
         client_kwargs={'scope': 'email'}
     )

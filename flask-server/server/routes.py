@@ -71,7 +71,7 @@ def authorize_google():
     
     user_id = user.id
     access_token, refresh_token = create_tokens(user_id)
-    response = redirect('https://bad-weather-notifier.onrender.com/')
+    response = redirect('https://bad-weather-notifier-server.onrender.com/')
     set_refresh_cookies(response, refresh_token)
     set_access_cookies(response, access_token)
     return response
@@ -93,7 +93,7 @@ def authorize_facebook():
     
     user_id = user.id
     access_token, refresh_token = create_tokens(user_id)
-    response = redirect('https://bad-weather-notifier.onrender.com/schedule')
+    response = redirect('https://bad-weather-notifier-server.onrender.com/schedule')
     set_refresh_cookies(response, refresh_token)
     set_access_cookies(response, access_token)
     return response
