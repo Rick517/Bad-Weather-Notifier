@@ -189,7 +189,8 @@ def get_geo():
             return jsonify(result), 200
     return "", 400
 
-
+# These routes for the functions above and '/' route to handle default index.html file
+# for react routing handling (404 not found error).
 @app.route('/')
 @app.route('/home')
 def home():
