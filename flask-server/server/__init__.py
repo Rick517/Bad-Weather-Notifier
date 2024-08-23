@@ -14,7 +14,7 @@ import pathlib
 # Setting folder to find index.html file to allow react to server routes. 
 # Setting path from /static to / to prevent misrouting and allow right one.
 parent = pathlib.Path(__file__).parent
-granparent = os.path.dirname()
+granparent = os.path.dirname(parent)
 url = os.path.join(granparent, 'react-client', 'dist')
 app = Flask(__name__, static_folder=url, static_url_path='/')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
