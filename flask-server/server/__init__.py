@@ -20,6 +20,8 @@ app.config['JWT_TOKEN_LOCATION'] = ['cookies']
 # should likely be True
 app.config['JWT_COOKIE_SECURE'] = True
 app.config['JWT_COOKIE_CSRF_PROTECT'] = True
+app.config['JWT_COOKIE_DOMAIN'] = 'bad-weather-notifier.onrender.com'
+
 
 CORS(app, supports_credentials=True, origins=['https://bad-weather-notifier.onrender.com', 'https://bad-weather-notifier.onrender.com/schedule'])
 oauth = OAuth(app)
