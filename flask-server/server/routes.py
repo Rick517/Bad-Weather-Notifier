@@ -71,7 +71,7 @@ def authorize_google():
     
     user_id = user.id
     access_token, refresh_token = create_tokens(user_id)
-    response = redirect(url_for('home'))
+    response = redirect('https://bad-weather-notifier.onrender.com/')
     set_refresh_cookies(response, refresh_token)
     set_access_cookies(response, access_token)
     return response
@@ -93,7 +93,7 @@ def authorize_facebook():
     
     user_id = user.id
     access_token, refresh_token = create_tokens(user_id)
-    response = redirect(url_for('schedule'))
+    response = redirect('https://bad-weather-notifier.onrender.com/schedule')
     set_refresh_cookies(response, refresh_token)
     set_access_cookies(response, access_token)
     return response
@@ -191,14 +191,11 @@ def get_geo():
 
 # These routes for the functions above and '/' route to handle default index.html file
 # for react routing handling (404 not found error).
-@app.route('/')
-def home():
+@app.route('/*')
+def index():
+    print('The index route is accessed.')
     print('Sending static file', app.send_static_file('index.html'))
     return app.send_static_file('index.html')
-
-@app.route('/schedule')
-def schedule():
-    return redirect('https://bad-weather-notifier.onrender.com/schedule')
 
 
 
