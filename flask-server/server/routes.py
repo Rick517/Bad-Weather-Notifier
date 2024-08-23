@@ -1,5 +1,5 @@
 from server import app, jwt, db, scheduler
-from flask import redirect, url_for, jsonify, make_response, request
+from flask import redirect, url_for, jsonify, make_response, request, send_from_directory
 from flask_jwt_extended import (
     create_access_token, create_refresh_token, unset_jwt_cookies,
     jwt_required, get_jwt_identity, set_refresh_cookies, set_access_cookies
@@ -191,11 +191,12 @@ def get_geo():
 
 # These routes for the functions above and '/' route to handle default index.html file
 # for react routing handling (404 not found error).
-@app.route('/*')
+@app.route('/')
+@app.route('/<path:path>')
 def index():
     print('The index route is accessed.')
     print('Sending static file', app.send_static_file('index.html'))
-    return jsonify({'message': (app.send_static_file('index.html'))})
+    return send_from_directory(app.static_folder, 'index.html')
 
 
 
