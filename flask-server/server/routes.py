@@ -195,12 +195,16 @@ def get_geo():
 def index():
     print('The index route is accessed.')
 
-    return send_from_directory('../../react-client/dist', 'index.html')
+    return app.send_static_file('index.html')
 
 @app.route('/<path:path>')
 def all_paths_index():
     print('The index path route is accessed.')
-    return send_from_directory('../../react-client/dist', 'index.html')
+    return app.send_static_file('index.html')
+
+@app.errorhandler(404)   
+def not_found(e):   
+  return app.send_static_file('index.html')
 
 
 
