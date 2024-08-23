@@ -195,7 +195,6 @@ def get_geo():
 @app.route('/<path:path>')
 def index():
     print('The index route is accessed.')
-    print('Sending static file', app.send_static_file('index.html'))
     return send_from_directory(app.static_folder, 'index.html')
 
 
