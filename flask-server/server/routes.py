@@ -71,7 +71,7 @@ def authorize_google():
     
     user_id = user.id
     access_token, refresh_token = create_tokens(user_id)
-    response = redirect('https://bad-weather-notifier.onrender.com/')
+    response = redirect(url_for('home'))
     set_refresh_cookies(response, refresh_token)
     set_access_cookies(response, access_token)
     return response
@@ -93,7 +93,7 @@ def authorize_facebook():
     
     user_id = user.id
     access_token, refresh_token = create_tokens(user_id)
-    response = redirect('https://bad-weather-notifier.onrender.com/schedule')
+    response = redirect(url_for('schedule'))
     set_refresh_cookies(response, refresh_token)
     set_access_cookies(response, access_token)
     return response
@@ -188,6 +188,16 @@ def get_geo():
         if result is not None: 
             return jsonify(result), 200
     return "", 400
+
+
+@app.route('/')
+@app.route('/home')
+def home():
+    return redirect('https://bad-weather-notifier.onrender.com/')
+
+@app.route('/schedule')
+def schedule():
+    return redirect('https://bad-weather-notifier.onrender.com/schedule')
 
 
 
