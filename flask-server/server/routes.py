@@ -44,7 +44,7 @@ def create_tokens(identity):
 @app.route('/login/google')
 def login_google():
     # Note: I must include url and the way that they match
-    url = url_for('authorize_google', _external=True)
+    url = 'https://bad-weather-notifier-server.onrender.com/oauth/google'
     #print(url)
     return google.authorize_redirect(url)
 

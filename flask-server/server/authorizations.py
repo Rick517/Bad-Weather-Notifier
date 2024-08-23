@@ -1,5 +1,6 @@
 from server import app, oauth
 from server.constants import google_keys, facebook_keys
+from flask import url_for
 
 
 with app.app_context():
@@ -18,6 +19,6 @@ with app.app_context():
         client_secret=facebook_keys['client_secret'],
         authorize_url=facebook_keys['authorize_url'],
         access_token_url=facebook_keys['access_token_url'],
-        redirect_uri='https://bad-weather-notifier-server.onrender.com/oauth/google',
+        redirect_uri='https://bad-weather-notifier-server.onrender.com/oauth/facebook',
         client_kwargs={'scope': 'email'}
     )
