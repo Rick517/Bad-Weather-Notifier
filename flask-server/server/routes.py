@@ -192,8 +192,8 @@ def get_geo():
 # These routes for the functions above and '/' route to handle default index.html file
 # for react routing handling (404 not found error).
 @app.route('/')
-@app.route('/home')
 def home():
+    print('Sending static file', app.send_static_file('index.html'))
     return app.send_static_file('index.html')
 
 @app.route('/schedule')
