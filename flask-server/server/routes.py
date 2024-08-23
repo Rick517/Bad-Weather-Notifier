@@ -194,7 +194,7 @@ def get_geo():
 @app.route('/')
 @app.route('/home')
 def home():
-    return redirect('https://bad-weather-notifier.onrender.com/')
+    return app.send_static_file('index.html')
 
 @app.route('/schedule')
 def schedule():
