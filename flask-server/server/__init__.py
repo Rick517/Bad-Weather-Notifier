@@ -7,12 +7,16 @@ import os
 from flask_mailman import Mail
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
+import pathlib
 
 
 # qq How to handle allowing server to let the fronted framework to serve routes independently? Explaing the problem why this solution is required.
 # Setting folder to find index.html file to allow react to server routes. 
 # Setting path from /static to / to prevent misrouting and allow right one.
-app = Flask(__name__, static_folder='../../react-client/dist', static_url_path='')
+parent = pathlib.Path(__file__).parent
+granparent = os.path.dirname()
+url = os.path.join(granparent, 'react-client', 'dist')
+app = Flask(__name__, static_folder=url, static_url_path='/')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///server.sqlite3'
 

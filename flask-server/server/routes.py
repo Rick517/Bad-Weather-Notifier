@@ -194,6 +194,7 @@ def get_geo():
 @app.route('/')
 def index():
     print('The index route is accessed.')
+
     return send_from_directory('../../react-client/dist', 'index.html')
 
 @app.route('/<path:path>')
