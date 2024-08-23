@@ -195,7 +195,7 @@ def get_geo():
 def index():
     print('The index route is accessed.')
     print('Sending static file', app.send_static_file('index.html'))
-    return app.send_static_file('index.html')
+    return jsonify({'message': (app.send_static_file('index.html'))})
 
 
 
