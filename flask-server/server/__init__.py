@@ -13,10 +13,9 @@ import pathlib
 # qq How to handle allowing server to let the fronted framework to serve routes independently? Explaing the problem why this solution is required.
 # Setting folder to find index.html file to allow react to server routes. 
 # Setting path from /static to / to prevent misrouting and allow right one.
-parent = pathlib.Path(__file__).parent
-granparent = os.path.dirname(parent)
-url = os.path.join(granparent, 'react-client', 'dist')
+parent = pathlib.Path(__file__).parent.parent.parent
 app = Flask(__name__, static_folder=url, static_url_path='/')
+print(app.static_folder, url)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///server.sqlite3'
 
