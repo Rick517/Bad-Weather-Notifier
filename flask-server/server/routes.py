@@ -192,10 +192,14 @@ def get_geo():
 # These routes for the functions above and '/' route to handle default index.html file
 # for react routing handling (404 not found error).
 @app.route('/')
-@app.route('/<path:path>')
 def index():
     print('The index route is accessed.')
-    return send_from_directory(app.static_folder, 'index.html')
+    return send_from_directory('../../react-client/dist', 'index.html')
+
+@app.route('/<path:path>')
+def all_paths_index():
+    print('The index path route is accessed.')
+    return send_from_directory('../../react-client/dist', 'index.html')
 
 
 
