@@ -44,7 +44,7 @@ def create_tokens(identity):
 @app.route('/login/google')
 def login_google():
     # Note: I must include url and the way that they match
-    url = 'https://bad-weather-notifier-server.onrender.com/oauth/google'
+    url = url_for('authorize_google', _external=True)
     #print(url)
     return google.authorize_redirect(url)
 
@@ -71,7 +71,7 @@ def authorize_google():
     
     user_id = user.id
     access_token, refresh_token = create_tokens(user_id)
-    response = redirect('https://bad-weather-notifier-server.onrender.com/')
+    response = redirect('https://bad-weather-notifier-server.onrender.com/schedule')
     set_refresh_cookies(response, refresh_token)
     set_access_cookies(response, access_token)
     return response
@@ -194,9 +194,10 @@ def get_geo():
 @app.route('/', defaults={'path': '/'})
 @app.route('/<path:path>')
 def index(path):
-    print(path, 'We are at redirecting', flush=True)
     return app.send_static_file('index.html')
 
-
+@app.errorhandler(404)   
+def not_found(e):  
+    return app.send_static_file('index.html')
 
 
