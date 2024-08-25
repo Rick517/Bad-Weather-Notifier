@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/server': {
-        target: 'https://bad-weather-notifier.onrender.com',
+        target: 'https://bad-weather-notifier-server.onrender.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/server/, ''),
       },
