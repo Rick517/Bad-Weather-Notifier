@@ -194,8 +194,8 @@ def get_geo():
 @app.route('/', defaults={'path': '/'})
 @app.route('/<path:path>')
 def index(path):
-    # Must reference the path to let the fronted understand
-    return app.send_static_file('index.html', path=path)
+    print(path, 'We are at redirecting', flush=True)
+    return app.send_static_file('index.html')
 
 
 
