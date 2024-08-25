@@ -1,9 +1,9 @@
-import Schedule from './components/Schedule.jsx'
-import {useState, useEffect} from 'react'
-import { Routes, Route, redirect, useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import Header from './components/Header.jsx'
-import Hero from './components/Hero.jsx'
+import Schedule from './components/Schedule.jsx';
+import {useState, useEffect} from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Header from './components/Header.jsx';
+import Hero from './components/Hero.jsx';
 
 
 const BASE_URL = 'https://bad-weather-notifier-server.onrender.com'
@@ -65,13 +65,13 @@ const App = () => {
 
 
   return (
-    <div>
+    <>
       <Header authorized={authorized} logout={logout} />
       <Routes>
         <Route path="/schedule" element={<Schedule authorized={authorized} changeAuthorization={changeAuthorization} />} />
         <Route path="/*" element={<Hero authorized={authorized} />} />
       </Routes>
-    </div>
+    </>
   )
 }
 

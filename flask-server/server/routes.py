@@ -193,15 +193,24 @@ def get_geo():
 # for react routing handling (404 not found error).
 @app.route('/')
 def index():
+    print('Index route is accessed', flush=True)
+    print(app.send_static_file('index.html'), app.static_folder, flush=True)
+    print('Static data has been printed', flush=True)
     return app.send_static_file('index.html')
 
 @app.route('/<path:path>')
 def all_paths_index():
+    print('All paths route is accessed', flush=True)
+    print(app.send_static_file('index.html'), app.static_folder, flush=True)
+    print('Static data has been printed', flush=True)
     return app.send_static_file('index.html')
 
 @app.errorhandler(404)   
-def not_found(e):   
-  return app.send_static_file('index.html')
+def not_found(e):  
+    print('Not found route is accessed', flush=True)
+    print(app.send_static_file('index.html'), app.static_folder, flush=True)
+    print('Static data has been printed', flush=True) 
+    return app.send_static_file('index.html')
 
 
 
