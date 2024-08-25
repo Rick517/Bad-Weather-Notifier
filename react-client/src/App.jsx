@@ -68,9 +68,8 @@ const App = () => {
     <>
       <Header authorized={authorized} logout={logout} />
       <Routes>
-        <Route path="/" element={<Hero authorized={authorized} />} />
-        <Route path="/home" element={<Hero authorized={authorized} />} />
         <Route path="/schedule" element={<Schedule authorized={authorized} changeAuthorization={changeAuthorization} />} />
+        <Route path="/*" element={<Hero authorized={authorized} />} />
       </Routes>
     </>
   )
