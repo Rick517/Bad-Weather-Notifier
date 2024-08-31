@@ -117,6 +117,7 @@ def generate_message(index, time, city):
     return subject, body
 
 def setup_email(index, data):
+    print("Setup email is started...", flush=True)
     with app.app_context():
         try:
             print('Sending email...', flush=True)

@@ -158,10 +158,10 @@ def schduler():
         print(request.args, request.form, request.get_json(), request.get_data(), flush=True)
         try:
             days_integer = data['days']
-            if days_integer != 128: # once
-                schedule = Schedules(id=data['id'], user_id=user_id, days=days_integer, 
+            schedule = Schedules(id=data['id'], user_id=user_id, days=days_integer, 
                     notifying_time=data['notifyingTime'], forecasting_time=data['forecastingTime'],
                     email=data['email'], lat=data['lat'], lon=data['lon'], date=datetime.datetime.now())
+            if days_integer != 128: # once
                 db.session.add(schedule)
                 db.session.commit()
             handle_create_schedule(schedule)
