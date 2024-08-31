@@ -9,16 +9,13 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 import pathlib
 
-import datetime
-from apscheduler.triggers.interval import IntervalTrigger
-
 
 # Setting folder to find index.html file to allow react to serve routes. 
 # Setting path from /static to / to prevent misrouting and allow right one.
 parent = pathlib.Path(__file__).parent.parent.parent
 url = os.path.join(parent, 'react-client', 'dist')
 app = Flask(__name__, static_folder=url, static_url_path='/')
-print(app.static_folder, url)
+#print(app.static_folder, url)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///server.sqlite3'
 
@@ -48,8 +45,6 @@ mail.__init__(app)
 # Job storing is to keep shcedules if app brokes or turned off
 # NOTE: this is a url to existing db
 with app.app_context():
-    def periodic_task():
-        print(f"Task executed at: {datetime.datetime.now(), datetime.timezone.utc}")
     jobstores = {
         'default': SQLAlchemyJobStore(engine=db.engine)
     }
@@ -64,9 +59,7 @@ with app.app_context():
     )
 
     # We don't need additional thread because flask handles it
-    scheduler.add_job(periodic_task, IntervalTrigger(minutes=1))
     scheduler.start()
-    scheduler.add_job(periodic_task, IntervalTrigger(minutes=1))
 
 
 from server import routes

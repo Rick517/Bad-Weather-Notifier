@@ -14,7 +14,7 @@ import datetime
 
 @jwt.unauthorized_loader
 def custom_unauthorized_response(callback):
-    print(request.cookies)
+    #print(request.cookies)
     return {'message': 'No token. '}, 498
 
 @jwt.invalid_token_loader
@@ -45,12 +45,12 @@ def create_tokens(identity):
 def login_google():
     # Note: I must include url and the way that they match
     url = url_for('authorize_google', _external=True)
-    print(url)
+    #print(url)
     return google.authorize_redirect(url)
 
 @app.route('/login/facebook')
 def login_facebook():
-    print(facebook)
+    #print(facebook)
     url = url_for('authorize_facebook', _external=True)
     return facebook.authorize_redirect(url)
 
@@ -59,7 +59,7 @@ def authorize_google():
     token = google.authorize_access_token()
     resp = google.get('https://www.googleapis.com/oauth2/v1/userinfo')
     user_info = resp.json()
-    print('Google oauth info:', user_info)
+    #print('Google oauth info:', user_info)
 
     email = user_info['email']
     user = User.is_registered(email)
@@ -67,7 +67,7 @@ def authorize_google():
         user = User(email=email)
         db.session.add(user)
         db.session.commit()
-        print('New user registered:', user)
+        #print('New user registered:', user)
     
     user_id = user.id
     access_token, refresh_token = create_tokens(user_id)
@@ -81,7 +81,7 @@ def authorize_facebook():
     token = facebook.authorize_access_token()
     resp = facebook.get('https://graph.facebook.com/me?fields=id,name,email')
     user_info = resp.json()
-    print('Facebook oauth info:', user_info)
+    #print('Facebook oauth info:', user_info)
 
     email = user_info['email']
     user = User.is_registered(email)
@@ -89,7 +89,7 @@ def authorize_facebook():
         user = User(email=email)
         db.session.add(user)
         db.session.commit()
-        print('New user registered:', user)
+        #print('New user registered:', user)
     
     user_id = user.id
     access_token, refresh_token = create_tokens(user_id)
@@ -112,7 +112,7 @@ def logout():
 @app.route('/server/refresh', methods=['GET', 'POST'])
 @jwt_required(refresh=True)
 def refresh():
-    print('refresh request')
+    #print('refresh request')
     user_id = get_jwt_identity()
     if User.query.filter_by(id=user_id).first() is None:
         response = make_response({'message': 'invalid user'}) # home
@@ -137,12 +137,12 @@ def schduler():
     schedule_id = request.args.get('schedule_id', None)
 
     if request.method == 'GET':
-        print('Received GET request. User id:', user_id)
+        #print('Received GET request. User id:', user_id)
         # Get all schedulers for the user
         schedules = Schedules.query.filter_by(user_id=user_id).order_by(Schedules.date.desc()).all()
         res = []
         for item in schedules:
-            print(item.date)
+            #print(item.date)
             res.append({
                 'id': item.id,
                 'days': item.days,
@@ -155,7 +155,7 @@ def schduler():
     if request.method == 'POST':
         # Add new schedule
         data = request.get_json()
-        print(request.args, request.form, request.get_json(), request.get_data(), flush=True)
+        #print(request.args, request.form, request.get_json(), request.get_data(), flush=True)
         try:
             days_integer = data['days']
             schedule = Schedules(id=data['id'], user_id=user_id, days=days_integer, 
@@ -166,14 +166,14 @@ def schduler():
                 db.session.commit()
             handle_create_schedule(schedule)
         except Exception as e:
-            print('ERROR WITH FORM DATA', e, flush=True)
+            #print('ERROR WITH FORM DATA', e, flush=True)
             return {'error': 'Invalid data. '}, 400
         return jsonify({'message': 'Successfully added. '}), 200
 
     if request.method == 'DELETE':
         # Delete schedule
         id = request.get_json()
-        print(id)
+        #print(id)
         scheduler.remove_job(id)
         schedule = Schedules.query.filter_by(id=id).first()
         db.session.delete(schedule)
