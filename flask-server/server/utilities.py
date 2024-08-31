@@ -40,14 +40,14 @@ def handle_connection(url):
         try:
             response = requests.get(cur_url, timeout=3)
             if response.status_code != 200:
-                raise ConnectionError('Something went wrong.')
+                raise ConnectionError('Something went wrong.', flush=True)
             data = response.json()
             if not data:
-                raise ValueError('No city found.')
+                raise ValueError('No city found.', flush=True)
             return data
         
         except Exception as e:
-            #print('ERROR getting api data:', e)
+            print('ERROR getting api data:', e, flush=True)
             pass
     
     return None
@@ -119,10 +119,10 @@ def generate_message(index, time, city):
 def setup_email(index, data):
     with app.app_context():
         try:
-            #print('Sending email...')
+            print('Sending email...', flush=True)
             subject, body = generate_message(index, data['time'], data['city'])
             if subject is None or body is None:
-                #print('ERROR sending email.', subject, body)
+                print('ERROR sending email.', subject, body, flush=True)
                 return
             
             em = EmailMessage(
@@ -134,9 +134,9 @@ def setup_email(index, data):
 
             em.content_subtype = 'html'
             em.send()
-            #print('Email was sent.')
+            print('Email was sent.', flush=True)
         except Exception as e:
-            #print('ERROR sending email:', e)
+            print('ERROR sending email:', e, flush=True)
             pass
 
 def identify_days(days):
@@ -184,13 +184,13 @@ def handle_create_schedule(schedule):
     }
     
     if schedule.days & 128: # Once
-        #print('Setting up sending once.')
+        print('Setting up sending once.', flush=True)
         current_date = datetime.datetime.now().date()
         run_time = datetime.datetime(current_date.year, current_date.month, current_date.day, not_hour, not_minute)
-        #print(run_time)
+        print(run_time, flush=True)
         job = scheduler.add_job(setup_email, 'date', run_date=run_time, args=[index, data], id=schedule.id)
     else:
         days = identify_days(schedule.days)
         job = scheduler.add_job(setup_email, 'cron', day_of_week=days, hour=not_hour, minute=not_minute, args=[index, data], id=schedule.id)
     
-    #print('Added job:', job)
+    print('Added job:', job, flush=True)
